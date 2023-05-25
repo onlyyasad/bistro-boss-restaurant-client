@@ -6,17 +6,21 @@ import FromOurMenu from "../FromOurMenu/FromOurMenu";
 import Footer from "../../Shared/Footer/Footer";
 import FeaturedSection from "../FeaturedSection/FeaturedSection";
 import Testimonials from "../Testimonials/Testimonials";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
     return (
         <div>
+            <Helmet>
+                <title>Bistro Boss | Home</title>
+            </Helmet>
             <Banner></Banner>
             <div className="max-w-6xl mx-auto">
                 <div>
                     <OrderOnline></OrderOnline>
                 </div>
                 <div>
-                    <SectionCover chefServiceImg={chefServiceImg}></SectionCover>
+                    <SectionCover sectionImg={chefServiceImg} secHeading="Bistro Boss"></SectionCover>
                 </div>
                 <div className="my-20">
                     <FromOurMenu></FromOurMenu>
@@ -30,9 +34,6 @@ const Home = () => {
             </div>
             <div className="max-w-6xl my-20 mx-auto">
                 <Testimonials></Testimonials>
-            </div>
-            <div>
-                <Footer></Footer>
             </div>
         </div>
     );

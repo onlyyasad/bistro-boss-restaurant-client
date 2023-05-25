@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../../Pages/Shared/NavBar/NavBar";
+import Footer from "../../Pages/Shared/Footer/Footer";
 
 
 const Main = () => {
@@ -7,6 +8,7 @@ const Main = () => {
         <div className="font-poppins">
             <NavBar></NavBar>
             <Outlet></Outlet>
+            <Footer></Footer>
         </div>
     );
 };

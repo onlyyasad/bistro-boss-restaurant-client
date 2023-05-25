@@ -6,7 +6,7 @@ const NavBar = () => {
         <Link to="/" className="hover:text-yellow-400 duration-300">Home</Link>
         <Link to="" className="hover:text-yellow-400 duration-300">Contact Us</Link>
         <Link to="" className="hover:text-yellow-400 duration-300">Dashboard</Link>
-        <Link to="" className="hover:text-yellow-400 duration-300">Our Menu</Link>
+        <Link to="/our-menu" className="hover:text-yellow-400 duration-300">Our Menu</Link>
         <Link to="" className="hover:text-yellow-400 duration-300">Our Shop</Link>
 
     </>

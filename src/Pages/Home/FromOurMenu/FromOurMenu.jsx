@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import MenuItem from "../../Shared/MenuItem/MenuItem";
+import SectionButton from "../../Shared/components/SectionButton";
 
 
 const FromOurMenu = () => {
@@ -19,9 +20,7 @@ const FromOurMenu = () => {
                     items.map(item => <MenuItem key={item._id} item={item}></MenuItem>)
                 }
             </div>
-            <div className="flex items-center justify-center">
-                <button className="btn bg-white text-black border-0 border-b-2 hover:text-white">View Full Menu</button>
-            </div>
+            <SectionButton btnText="View full Menu"></SectionButton>
         </div>
     );
 };
