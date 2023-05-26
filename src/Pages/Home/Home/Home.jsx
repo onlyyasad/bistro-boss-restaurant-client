@@ -3,7 +3,6 @@ import OrderOnline from "../OrderOnline/OrderOnline";
 import chefServiceImg from "../../../assets/home/chef-service.jpg";
 import SectionCover from "../../Shared/SectionCover/SectionCover";
 import FromOurMenu from "../FromOurMenu/FromOurMenu";
-import Footer from "../../Shared/Footer/Footer";
 import FeaturedSection from "../FeaturedSection/FeaturedSection";
 import Testimonials from "../Testimonials/Testimonials";
 import { Helmet } from "react-helmet-async";

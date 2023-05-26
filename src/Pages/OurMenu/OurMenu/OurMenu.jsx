@@ -29,16 +29,16 @@ const OurMenu = () => {
                     <MenuCategory items={offered} sectionImg={""} secHeading={""} title="Today's Offer" subTitle="Don't miss" btnText="Order your favorite food"></MenuCategory>
                 </div>
                 <div className="my-20">
-                    <MenuCategory items={dessert} sectionImg={dessertBg} secHeading={"Desserts"} title="" subTitle="" btnText="Order your favorite food"></MenuCategory>
+                    <MenuCategory items={dessert} sectionImg={dessertBg} secHeading={"desserts"} title="" subTitle="" btnText="Order your favorite food"></MenuCategory>
                 </div>
                 <div className="my-20">
-                    <MenuCategory items={pizza} sectionImg={pizzaBg} secHeading={"Pizza"} title="" subTitle="" btnText="Order your favorite food"></MenuCategory>
+                    <MenuCategory items={pizza} sectionImg={pizzaBg} secHeading={"pizza"} title="" subTitle="" btnText="Order your favorite food"></MenuCategory>
                 </div>
                 <div className="my-20">
-                    <MenuCategory items={salad} sectionImg={saladBg} secHeading={"Salads"} title="" subTitle="" btnText="Order your favorite food"></MenuCategory>
+                    <MenuCategory items={salad} sectionImg={saladBg} secHeading={"salads"} title="" subTitle="" btnText="Order your favorite food"></MenuCategory>
                 </div>
                 <div className="my-20">
-                    <MenuCategory items={soup} sectionImg={soupBg} secHeading={"Soups"} title="" subTitle="" btnText="Order your favorite food"></MenuCategory>
+                    <MenuCategory items={soup} sectionImg={soupBg} secHeading={"soups"} title="" subTitle="" btnText="Order your favorite food"></MenuCategory>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import MenuItem from "../../Shared/MenuItem/MenuItem";
 import SectionButton from "../../Shared/components/SectionButton";
+import { Link } from "react-router-dom";
 
 
 const FromOurMenu = () => {
@@ -20,7 +21,7 @@ const FromOurMenu = () => {
                     items.map(item => <MenuItem key={item._id} item={item}></MenuItem>)
                 }
             </div>
-            <SectionButton btnText="View full Menu"></SectionButton>
+            <Link to="/menu"><SectionButton btnText="View full Menu"></SectionButton></Link>
         </div>
     );
 };

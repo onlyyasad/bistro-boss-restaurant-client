@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MenuItem from "../../Shared/MenuItem/MenuItem";
 import SectionCover from "../../Shared/SectionCover/SectionCover";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
@@ -14,7 +15,7 @@ const MenuCategory = ({items, sectionImg, secHeading, title, subTitle, btnText})
                     items.map(item => <MenuItem key={item._id} item={item}></MenuItem>)
                 }
             </div>
-            <SectionButton btnText={btnText}></SectionButton>
+            <Link to={`/order/${secHeading? secHeading : "salads"}`}><SectionButton btnText={btnText}></SectionButton></Link>
         </>
     );
 };
