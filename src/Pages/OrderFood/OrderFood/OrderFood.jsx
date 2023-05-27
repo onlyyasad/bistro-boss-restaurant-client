@@ -27,13 +27,13 @@ const OrderFood = () => {
             </Helmet>
             <PageBanner bannerImg={orderImg} pageTitle={"Order Food"} pageSubTitle={"Would you like to try a dish?"}></PageBanner>
             <div className="max-w-6xl mx-auto my-20">
-                <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+                <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)} >
                     <TabList className="flex cursor-pointer justify-center items-center gap-4 my-10">
-                        <Tab >Salad</Tab>
-                        <Tab >Pizza</Tab>
-                        <Tab >Soups</Tab>
-                        <Tab >Desserts</Tab>
-                        <Tab >Drinks</Tab>
+                        <Tab className="border-b-2 p-2 border-white hover:text-yellow-600 hover:border-yellow-600">Salad</Tab>
+                        <Tab className="border-b-2 p-2 border-white hover:text-yellow-600 hover:border-yellow-600">Pizza</Tab>
+                        <Tab className="border-b-2 p-2 border-white hover:text-yellow-600 hover:border-yellow-600">Soups</Tab>
+                        <Tab className="border-b-2 p-2 border-white hover:text-yellow-600 hover:border-yellow-600">Desserts</Tab>
+                        <Tab className="border-b-2 p-2 border-white hover:text-yellow-600 hover:border-yellow-600">Drinks</Tab>
                     </TabList>
 
                     <TabPanel>
