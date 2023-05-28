@@ -1,13 +1,15 @@
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaFacebookF, FaGoogle, FaGithub } from 'react-icons/fa';
 import signinImg from "../../../assets/others/authentication2.png"
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const Login = () => {
     const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
+    const {loginUser} = useContext(AuthContext)
     const {
         register,
         handleSubmit,
@@ -29,12 +31,27 @@ const Login = () => {
             alert("Captcha didn't match! Please try again.")
         }
     }
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/"
+    const navigate = useNavigate();
+
+    const handleLogin = (user) =>{
+        const email = user.email;
+        const password = user.password;
+        loginUser(email, password)
+        .then(result =>{
+            const loggedInUser = result.user;
+            console.log(loggedInUser)
+            navigate(from, {replace: true})
+        })
+        .catch(error => console.log(error.message))
+    }
     return (
         <div>
             <div>
 
             </div>
-            <div className="hero min-h-screen py-20 bg-base-100">
+            <div className="hero min-h-screen py-8 bg-base-100">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
                         <img src={signinImg} alt="" />
@@ -43,7 +60,7 @@ const Login = () => {
                         <div className='card-body pb-0'>
                             <h3 className='text-center font-bold text-xl pb-4'>Sign In</h3>
                         </div>
-                        <form className="card-body pt-0" onSubmit={handleSubmit((data) => console.log(data))}>
+                        <form className="card-body pt-0" onSubmit={handleSubmit((data) => handleLogin(data))}>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>

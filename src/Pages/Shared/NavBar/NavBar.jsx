@@ -1,13 +1,26 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import { FaShoppingCart } from 'react-icons/fa';
+import useCart from "../../../hooks/useCart";
 
 
 const NavBar = () => {
+
+    const { user, logOutUser } = useContext(AuthContext);
+    const [cart] = useCart();
     const menuLi = <>
         <Link to="/" className="hover:text-yellow-400 duration-300">Home</Link>
         <Link to="" className="hover:text-yellow-400 duration-300">Contact Us</Link>
         <Link to="" className="hover:text-yellow-400 duration-300">Dashboard</Link>
         <Link to="/menu" className="hover:text-yellow-400 duration-300">Our Menu</Link>
         <Link to="/order/salads" className="hover:text-yellow-400 duration-300">Order Food</Link>
+        <Link to="/dashboard">
+            <button className="btn gap-2">
+                <FaShoppingCart />
+                <div className="badge badge-secondary">+{cart?.length}</div>
+            </button>
+        </Link>
 
     </>
     return (
@@ -25,12 +38,20 @@ const NavBar = () => {
                     <Link to="/" className="text-xl font-cinzel"><p className="font-bold text-2xl">BISTRO BOSS</p><p className="font-bold text-sm tracking-[0.6em]">RestauranT</p></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <div className="menu menu-horizontal gap-4 uppercase font-poppins font-semibold px-1">
+                    <div className="menu menu-horizontal items-center gap-4 uppercase font-poppins font-semibold px-1">
                         {menuLi}
                     </div>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/login" className="btn">Login</Link>
+                    {user ?
+                        <div className="flex items-center gap-4">
+                            <img className=" w-12 rounded-full" src={user.photoURL} alt="user" title={user.displayName} />
+                            <button onClick={() => logOutUser()} className="btn">Logout</button>
+                        </div> :
+                        <>
+                            <Link to="/login" className="btn">Login</Link>
+                        </>}
+
                 </div>
             </div>
         </div>

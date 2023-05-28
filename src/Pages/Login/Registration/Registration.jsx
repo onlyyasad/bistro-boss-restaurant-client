@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaGoogle, FaGithub } from 'react-icons/fa';
 import signUpImg from "../../../assets/others/authentication2.png"
+import { useContext } from 'react';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 
 const Registration = () => {
@@ -9,10 +11,29 @@ const Registration = () => {
         register,
         handleSubmit,
         formState: { errors },
+        reset
     } = useForm();
+    const {createUser, updateUserData} = useContext(AuthContext);
+
+    const handleSignUp = (user) =>{
+        const email = user.email;
+        const password = user.password;
+        const name = user.name;
+        const photo = user.photo;
+        createUser(email, password)
+        .then(result => {
+            const newUser = result.user;
+            updateUserData(newUser, name, photo)
+            .then(() =>{
+                reset()
+                alert("Sign Up Successfull!")
+            })
+            .catch(error => console.log(error.message))
+        })
+    }
     return (
         <div>
-            <div className="hero min-h-screen py-20 bg-base-100">
+            <div className="hero min-h-screen py-8 bg-base-100">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
                         <img className='w-full' src={signUpImg} alt="" />
@@ -21,13 +42,20 @@ const Registration = () => {
                         <div className='card-body pb-0'>
                             <h3 className='text-center font-bold text-xl pb-4'>Sign Up</h3>
                         </div>
-                        <form className="card-body pt-0" onSubmit={handleSubmit((data) => console.log(data))}>
+                        <form className="card-body pt-0" onSubmit={handleSubmit((data) => handleSignUp(data))}>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
                                 <input type="text" placeholder="Your Name" {...register('name', { required: true })} className="input input-bordered" />
                                 {errors.name && <p className='text-xs mt-2 text-red-500'>Name is required.</p>}
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Photo URL</span>
+                                </label>
+                                <input type="text" placeholder="Your Name" {...register('photo', { required: true })} className="input input-bordered" />
+                                {errors.photo && <p className='text-xs mt-2 text-red-500'>Photo URL is required.</p>}
                             </div>
                             <div className="form-control">
                                 <label className="label">

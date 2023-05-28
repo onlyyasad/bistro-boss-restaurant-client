@@ -1,14 +1,17 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import NavBar from "../../Pages/Shared/NavBar/NavBar";
 import Footer from "../../Pages/Shared/Footer/Footer";
 
 
 const Main = () => {
+    const location = useLocation()
+    const noNavbarFooter = location.pathname === "/login" || location.pathname === "/registration";
+    
     return (
         <div className="font-poppins">
-            <NavBar></NavBar>
+            {noNavbarFooter || <NavBar></NavBar>}
             <Outlet></Outlet>
-            <Footer></Footer>
+            {noNavbarFooter || <Footer></Footer>}
         </div>
     );
 };
