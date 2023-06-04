@@ -9,7 +9,7 @@ import { AuthContext } from '../../../AuthProvider/AuthProvider';
 const Login = () => {
     const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
-    const {loginUser} = useContext(AuthContext)
+    const { loginUser, googleLogin } = useContext(AuthContext)
     const {
         register,
         handleSubmit,
@@ -20,12 +20,12 @@ const Login = () => {
         loadCaptchaEnginge(6);
     }, [])
 
-    const handlevalidateCaptcha = () =>{
+    const handlevalidateCaptcha = () => {
         const user_captcha_value = captchaRef.current.value;
-        if (validateCaptcha(user_captcha_value)==true) {
+        if (validateCaptcha(user_captcha_value) == true) {
             setDisabled(false);
         }
-   
+
         else {
             setDisabled(true);
             alert("Captcha didn't match! Please try again.")
@@ -35,16 +35,38 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/"
     const navigate = useNavigate();
 
-    const handleLogin = (user) =>{
+    const handleLogin = (user) => {
         const email = user.email;
         const password = user.password;
         loginUser(email, password)
-        .then(result =>{
-            const loggedInUser = result.user;
-            console.log(loggedInUser)
-            navigate(from, {replace: true})
-        })
-        .catch(error => console.log(error.message))
+            .then(result => {
+                const loggedInUser = result.user;
+                console.log(loggedInUser)
+                navigate(from, { replace: true })
+            })
+            .catch(error => console.log(error.message))
+    }
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                const saveUser = { name: user.displayName, email: user.email }
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(saveUser)
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        navigate(from, { replace: true })
+                    })
+                
+            })
+            .catch(error => console.log(error.message))
     }
     return (
         <div>
@@ -80,11 +102,11 @@ const Login = () => {
                                     <LoadCanvasTemplate />
                                 </label>
                                 <input type="text" ref={captchaRef} placeholder="Type here" className="input input-bordered" />
-                                <p onClick={handlevalidateCaptcha} className={`btn btn-xs mt-4 normal-case ${!disabled? "btn-disabled" : ""}`}>Validate Captcha</p>
-                                
+                                <p onClick={handlevalidateCaptcha} className={`btn btn-xs mt-4 normal-case ${!disabled ? "btn-disabled" : ""}`}>Validate Captcha</p>
+
                             </div>
                             <div className="form-control mt-6">
-                                <button type='submit' className={`btn bg-yellow-600 hover:bg-yellow-700 normal-case border-0 hover:border-0 ${disabled? "btn-disabled" : ""}`}>Sign In</button>
+                                <button type='submit' className={`btn bg-yellow-600 hover:bg-yellow-700 normal-case border-0 hover:border-0 ${disabled ? "btn-disabled" : ""}`}>Sign In</button>
                             </div>
                         </form>
 
@@ -93,7 +115,7 @@ const Login = () => {
                             <h3>Or Sign up with</h3>
                             <div className='flex justify-center gap-4'>
                                 <button className="btn btn-circle btn-sm btn-outline"><FaFacebookF /></button>
-                                <button className="btn btn-circle btn-sm btn-outline"><FaGoogle /></button>
+                                <button onClick={handleGoogleLogin} className="btn btn-circle btn-sm btn-outline"><FaGoogle /></button>
                                 <button className="btn btn-circle btn-sm btn-outline"><FaGithub /></button>
                             </div>
                         </div>
